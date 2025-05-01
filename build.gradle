@@ -38,4 +38,12 @@ jar {
         configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
     }
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+    // Robustly exclude signature files from all merged jars
+    exclude 'META-INF/**/*.SF', 'META-INF/**/*.DSA', 'META-INF/**/*.RSA'
+    eachFile { file ->
+        if (file.path ==~ /META-INF\/.*\.(SF|DSA|RSA)/) {
+            file.exclude()
+        }
+    }
 }

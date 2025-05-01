@@ -20,6 +20,12 @@ public class Main implements Callable<Integer> {
     @Option(names = {"--output"}, description = "Output jar file (remapped)", required = true)
     Path outputJar;
 
+    @Option(names = {"--from"}, description = "Source namespace", required = true)
+    String fromNamespace;
+
+    @Option(names = {"--to"}, description = "Target namespace", required = true)
+    String toNamespace;
+
     public static void main(String[] args) {
         int exitCode = new CommandLine(new Main()).execute(args);
         System.exit(exitCode);
@@ -27,7 +33,19 @@ public class Main implements Callable<Integer> {
 
     @Override
     public Integer call() throws Exception {
-        RemapService remapper = new RemapService(inputJar, mappingsFile, outputJar);
+        if (inputJar.toString().contains("/")) {
+            System.err.println("Error: Input jar path must use '\\' instead of '/'.");
+            return 1;
+        }
+        if (mappingsFile.toString().contains("/")) {
+            System.err.println("Error: Mappings file path must use '\\' instead of '/'.");
+            return 1;
+        }
+        if (outputJar.toString().contains("/")) {
+            System.err.println("Error: Output jar path must use '\\' instead of '/'.");
+            return 1;
+        }
+        RemapService remapper = new RemapService(inputJar, mappingsFile, outputJar, fromNamespace, toNamespace);
         remapper.run();
         return 0;
     }
