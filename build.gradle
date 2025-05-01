@@ -12,13 +12,19 @@ repositories {
 }
 
 dependencies {
-    implementation 'net.fabricmc:tiny-remapper:0.8.6'
-    implementation 'net.fabricmc:mapping-io:0.3.0'
+    implementation 'net.fabricmc:tiny-remapper:0.11.1'
+    implementation 'net.fabricmc:mapping-io:0.7.1'
     implementation 'info.picocli:picocli:4.7.5'
 }
 
 application {
     mainClass = 'com.threadmc.trc.Main'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
 }
 
 jar {
