@@ -31,6 +31,5 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: ${{ steps.find_jar.outputs.jar_path }}
-          name: tinyremapper-cli.jar
         env:
           GITHUB_TOKEN: ${{ secrets.PAT }}
