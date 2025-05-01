@@ -15,5 +15,5 @@ Download the latest release jar from the [Releases](https://github.com/threadmc/
 ## Usage
 
 ```bash
-java -jar tinyremapper-cli.jar --input server.jar --output remapped.jar --mappings mappings.tiny --from official --to named
+java -jar tinyremapper-cli.jar --input server.jar --mappings mappings.tiny --output remapped.jar --from official --to named
 ```
