@@ -24,7 +24,7 @@ jobs:
       - name: Find JAR file
         id: find_jar
         run: |
-          JAR_PATH=$(ls ./build/libs/tinyremapper-cli-*.jar | head -n 1)
+          JAR_PATH=$(ls ./build/libs/trc-*.jar | head -n 1)
           echo "jar_path=$JAR_PATH" >> $GITHUB_OUTPUT
 
       - name: Upload Release Asset

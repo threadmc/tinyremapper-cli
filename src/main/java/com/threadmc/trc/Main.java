@@ -7,7 +7,7 @@ import picocli.CommandLine.Command;
 import java.nio.file.Path;
 import java.util.concurrent.Callable;
 
-@Command(name = "tiny-remap-cli", mixinStandardHelpOptions = true, version = "1.0.0",
+@Command(name = "trc", mixinStandardHelpOptions = true, version = "1.1.0",
         description = "Remaps obfuscated Minecraft jars using TinyRemapper and Mojang mappings.")
 public class Main implements Callable<Integer> {
 

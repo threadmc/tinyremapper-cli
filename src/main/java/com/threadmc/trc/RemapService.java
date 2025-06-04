@@ -31,11 +31,11 @@ public class RemapService {
     }
 
     public void run() throws IOException {
-        System.out.println("Loading mappings...");
+        System.out.println("[TRC] Loading mappings...");
         MemoryMappingTree tree = new MemoryMappingTree();
         MappingReader.read(mappingsFile, tree);
 
-        System.out.println("Setting up TinyRemapper...");
+        System.out.println("[TRC] Setting up TinyRemapper...");
 
         TinyRemapper remapper = TinyRemapper.newRemapper()
                 .withMappings(TinyUtils.createTinyMappingProvider(mappingsFile, fromNamespace, toNamespace))
@@ -44,7 +44,7 @@ public class RemapService {
                 .fixPackageAccess(true)
                 .build();
 
-        System.out.println("Remapping jar...");
+        System.out.println("[TRC] Remapping jar...");
         try (@SuppressWarnings("deprecation") OutputConsumerPath outputConsumer = new OutputConsumerPath(outputJar)) {
             outputConsumer.addNonClassFiles(inputJar);
             remapper.readInputs(inputJar);
@@ -52,7 +52,7 @@ public class RemapService {
         }
 
         if (!Files.exists(outputJar)) {
-            throw new IOException("Remapped output jar was not created: " + outputJar);
+            throw new IOException("[TRC] Remapped output jar was not created: " + outputJar);
         }
 
         Path tempJar = Files.createTempFile("remapped-filtered", ".jar");
@@ -83,6 +83,6 @@ public class RemapService {
         Files.move(tempJar, outputJar, java.nio.file.StandardCopyOption.REPLACE_EXISTING);
 
         remapper.finish();
-        System.out.println("Remapped jar created at: " + outputJar.toAbsolutePath());
+        System.out.println("[TRC] Remapped jar created at: " + outputJar.toAbsolutePath());
     }
 }

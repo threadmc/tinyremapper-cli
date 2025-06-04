@@ -1,4 +1,4 @@
-# tinyremapper-cli
+# TRC (TinyRemapper CLI)
 
 A simple command-line tool to remap Minecraft jars using TinyRemapper.
 
